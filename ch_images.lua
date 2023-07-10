@@ -282,21 +282,21 @@ avatars.fn_create_item = function(name)
     avatars.data[name].loaded = false
     avatars.data[name].loading = false
 end
-avatars.fn_get_avatar = function(entindex)
-    if avatars.data[entindex] and avatars.data[entindex].loaded then
-        return avatars.data[entindex].image
+avatars.fn_get_avatar = function(name, entindex)
+    if avatars.data[name] and avatars.data[name].loaded then
+        return avatars.data[name].image
     end
 
-    if avatars.data[entindex] == nil then
-        avatars.fn_create_item(entindex)
-        local _, steam_id = entity_list.get_entity(entindex):get_steamids()
+    if avatars.data[name] == nil then
+        avatars.fn_create_item(name)
+        local _, steam_id = entity_list.get_entity(name):get_steamids()
 
         if #steam_id<5 then return end
         if steam_id == nil or avatars.default_image == nil then
             return nil
         end
-        avatars.data[entindex].image = get_avatar(steam_id)
-        avatars.data[entindex].loaded = true
+        avatars.data[name].image = get_avatar(steam_id)
+        avatars.data[name].loaded = true
     end
     return avatars.default_image
 end
